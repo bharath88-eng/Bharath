@@ -1,0 +1,37 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data: Each row is a player with performance metrics
+data = {
+    'Player': ['Alice', 'Bob', 'Carlos', 'Diana', 'Evan'],
+    'Goals': [10, 5, 7, 3, 8],
+    'Assists': [4, 7, 2, 9, 6],
+    'Pass Accuracy (%)': [85, 78, 82, 90, 88],
+    'Tackles': [12, 9, 15, 8, 10]
+}
+
+df = pd.DataFrame(data)
+
+# Performance score (example formula)
+df['Performance Score'] = (
+    df['Goals'] * 4 +
+    df['Assists'] * 3 +
+    df['Pass Accuracy (%)'] * 0.5 +
+    df['Tackles'] * 1.5
+)
+
+# Top performer
+top_player = df.loc[df['Performance Score'].idxmax()]
+
+print("Top Performer:")
+print(top_player)
+
+# Visualize player scores
+plt.figure(figsize=(10, 6))
+plt.bar(df['Player'], df['Performance Score'], color='skyblue')
+plt.title('Player Performance Scores')
+plt.xlabel('Player')
+plt.ylabel('Score')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
